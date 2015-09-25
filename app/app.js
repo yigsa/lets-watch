@@ -1,5 +1,5 @@
 let express = require('express')
-    require('songbird')
+require('songbird')
 let routes = require('./routes')
 let path = require('path')
 let morgan = require('morgan')
@@ -27,6 +27,9 @@ module.exports = class App {
       resave: true,
       saveUninitialized: true
     }))
+
+    // auth setup
+    // this.expressServer.use()
 
     routes(this.expressServer)
   }
