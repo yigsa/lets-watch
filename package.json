@@ -1,12 +1,14 @@
 {
   "name": "lets-watch",
   "version": "0.0.1",
-  "main" : "index.js",
-  "scripts":{
+  "main": "index.js",
+  "scripts": {
     "start": "nodemon --exec babel-node -- --stage 1 --optional strict -- index.js"
   },
-  "dependencies":{
+  "dependencies": {
     "babelify": "^6.3.0",
+    "bcrypt": "^0.8.2",
+    "bluebird-nodeify": "^1.0.0",
     "body-parser": "^1.14.0",
     "browserify": "^10.2.1",
     "browserify-middleware": "^5.0.2",
