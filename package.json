@@ -1,0 +1,39 @@
+{
+  "name": "lets-watch",
+  "version": "0.0.1",
+  "main" : "index.js",
+  "scripts":{
+    "start": "nodemon --exec babel-node -- --stage 1 --optional strict -- index.js"
+  },
+  "dependencies":{
+    "babelify": "^6.3.0",
+    "body-parser": "^1.14.0",
+    "browserify": "^10.2.1",
+    "browserify-middleware": "^5.0.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^0.8.2",
+    "cookie-parser": "^1.4.0",
+    "crypto": "0.0.3",
+    "ejs": "^2.3.1",
+    "express": "^4.0.0",
+    "express-session": "^1.11.3",
+    "express-then": "^1.0.3",
+    "fb": "git+https://git@github.com/Thuzi/facebook-node-sdk.git",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.1",
+    "mongoose": "^4.1.7",
+    "morgan": "^1.6.1",
+    "nodeifyit": "^1.0.2",
+    "passport": "^0.2.2",
+    "passport-facebook": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "passport-twitter": "^1.0.3",
+    "request": "^2.55.0",
+    "require-dir": "^0.3.0",
+    "socket.io": "^1.3.6",
+    "socket.io-client": "^1.3.5",
+    "songbird": "^1.0.1",
+    "trycatch": "^1.5.20",
+    "twitter": "^1.2.5"
+  }
+}
