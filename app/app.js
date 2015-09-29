@@ -15,6 +15,8 @@ module.exports = class App {
 
     this.expressServer.use(morgan('dev')) // log requests
     this.expressServer.use(cookieParser('letswatch')) // read cookies (needed for auth)
+    this.expressServer.use(express.static(__dirname + '/public'))
+    this.expressServer.use(express.static(__dirname + '/node_modules'))
     this.expressServer.set('views', path.join( __dirname, '..', 'views'))
     this.expressServer.set('view engine', 'ejs')
     this.expressServer.use(bodyParser.json()) // get information from html forms
