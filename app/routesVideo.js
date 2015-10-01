@@ -27,7 +27,5 @@ io.listen(PORT);
 console.log("Socket.io running on http://localhost:" + PORT);
 
 module.exports = (req, res) => {
-
-
   res.render("video.ejs")
 }

@@ -1,29 +1,72 @@
 <!doctype html>
 <html>
 <head>
-    <title>Let's Watch! - Video</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
+  <title>Let's Watch! - Video</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet"
+        href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+  <style>
+    .vjs-default-skin .vjs-big-play-button {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <script src="//vjs.zencdn.net/4.12/video.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-    <script>
-        var socket = io('http://localhost:3000');
-        socket.on('connect', function(){
-            socket.emit('join', 'Hello World from client');
-            
-            socket.on('greetings', function(data) {
-              console.log(data);
-            })
-            
-        });
-    </script>
+  <script>
+    var socket = io('http://localhost:3000');
+    socket.on('connect', function () {
+      socket.emit('join', 'Hello World from client');
+
+      socket.on('greetings', function (data) {
+        console.log(data);
+      });
+
+    });
+  </script>
 </head>
 <body>
 <div class="container">
-<div class="col-sm-6 col-sm-offset-3">
+  <div class="col-sm-6 col-sm-offset-3">
     <h1>Video</h1>
-    test
+    <video id="really-cool-video" class="video-js vjs-default-skin" controls
+           preload="auto" width="640" height="400" data-setup='{}'>
+      <source src="/videos/video-test.mp4#t=0" type='video/mp4'>
+      <track src="/videos/developerStories-subtitles-en.vtt" label="English subtitles"
+             kind="subtitles" srclang="en" default></track>
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
+      </p>
+    </video>
+  </div>
 </div>
-</div>
+<script>
+  //src="/videos/video-test.mp4#t=174"
+  var player = videojs('really-cool-video', { /* Options */ }, function() {
+    console.log('Good to go!');
+
+//    this.play(); // if you don't trust autoplay for some reason
+
+    // How about an event listener?
+//    this.on('ended', function() {
+//      console.log('awww...over so soon?');
+//    });
+
+    //get time
+//    setInterval(function() {
+//      var whereYouAt = player.currentTime();
+//      console.log(whereYouAt);
+//
+//    }, 1000);
+
+    // set time
+//    player.currentTime(120); // 2 minutes into the video
+  });
+</script>
 </body>
 </html>
