@@ -6,6 +6,7 @@
  * user B: saw message user A is watching video1, clicked message to watch w A. user B is directed to video page and start at where User A is at, and can chat
  *
  * @TODO:
+ * identify host socket when refresh?
  * add socket io channel for video
  * webpack, react, firebase?
  */
