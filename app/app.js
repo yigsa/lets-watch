@@ -19,6 +19,9 @@ module.exports = class App {
     passportMiddleware.configure()
     this.expressServer.passport = passportMiddleware.passport
 
+    console.log("NODE_ENV "+NODE_ENV)
+    console.log(" Mongo URL "+config.database[NODE_ENV].url)
+
     // set app.config (can be used in routes.js)
     this.expressServer.config = {
       database: config.database[NODE_ENV]
