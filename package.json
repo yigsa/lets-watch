@@ -3,9 +3,12 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node -- --stage 1 --optional strict -- index.js"
+    "postinstall": "babel -d dist server",
+    "start": "node index.js"
+
   },
   "dependencies": {
+    "babel": "^5.8.23",
     "babelify": "^6.3.0",
     "bcrypt": "^0.8.2",
     "bluebird-nodeify": "^1.0.0",

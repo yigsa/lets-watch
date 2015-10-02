@@ -1,3 +1,4 @@
+require('babel/polyfill');
 let express = require('express')
 let requireDir = require('require-dir')
 

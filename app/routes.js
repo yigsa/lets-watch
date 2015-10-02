@@ -16,7 +16,7 @@ module.exports = (app) => {
 
   // POST signup
   app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect: '/profile',
+    successRedirect: '/video',
     failureRedirect: '/signup',
     failureFlash: true
   }))
@@ -28,7 +28,7 @@ module.exports = (app) => {
 
   // POST login
   app.post('/login', passport.authenticate('local', {
-    successRedirect: '/profile',
+    successRedirect: '/video',
     failureRedirect: '/login',
     failureFlash: true
   }))
