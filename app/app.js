@@ -40,7 +40,7 @@ module.exports = class App {
 
     this.expressServer.use(session({
       secret: 'letswatch',
-      store: new MongoStore({db: 'lets-watch'}),
+      store: new MongoStore({url: config.database[NODE_ENV].url}),
       resave: true,
       saveUninitialized: true
     }))
