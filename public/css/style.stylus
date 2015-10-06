@@ -1,0 +1,47 @@
+#chat-input {
+  width: 100%;
+}
+#chat-timeline,
+.chat-time {
+  color: #286090;
+  font-weight: 800;
+}
+.glyphicon-user {
+  font-size: 30px;
+}
+.glyphicon-play-circle {
+  font-size: 20px;
+  margin-right: 5px 10px;
+}
+
+#chat-message {
+  .list-group-item {
+    padding: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+      background: #f5f5f5;
+    }
+
+    > span {
+      vertical-align: top;
+    }
+  }
+}
+
+#really-cool-video {
+  width: 100%;
+}
+
+#video-subtitle {
+  .glyphicon-play-circle {
+    display: none;
+  }
+
+  .chat-time {
+    display: block;
+  }
+}

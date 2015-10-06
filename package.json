@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --exec babel-node -- --stage 1 --optional strict -- index.js",
     "start": "node index.js"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "express-session": "^1.11.3",
     "express-then": "^1.0.3",
     "fb": "git+https://git@github.com/Thuzi/facebook-node-sdk.git",
+    "firebase": "^2.3.1",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "mongoose": "^4.1.7",

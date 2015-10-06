@@ -1,13 +1,19 @@
-let routeVideo = require("./routesVideo");
 let express = require("express");
+let routeVideo = require("./routesVideo");
 
 module.exports = (app) => {
   let passport = app.passport
 
+  //var server = require("http").createServer(app);
+  //var io = require("socket.io")(server);
+
 	app.get('/', (req, res) => res.render('index.ejs'))
 
   // video item page
-  app.get("/video", routeVideo.bind(app));
+  app.get("/video", (req, res) => {
+    res.render('index.ejs')
+  });
+  app.get("/video/sunjoe_mow_joe_14", routeVideo.bind(app));
 
   // GET signup
   app.get('/signup', (req, res) => {

@@ -2,100 +2,85 @@
 <html>
 <head>
   <title>Let's Watch! - Video</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
   <link rel="stylesheet"
         href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-  <!--<link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">-->
-  <style>
-    .vjs-default-skin .vjs-big-play-button {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
 <div class="container">
-  <div class="col-sm-6 col-sm-offset-3">
-    <h1>Video
-      <% if (isHost) { %>(Host )<% } %>
-    </h1>
-    <video id="really-cool-video" class="video-js vjs-default-skin" controls
-           preload="auto" width="640" height="400" data-setup='{}'>
-      <source src="/videos/video-test.mp4#t=0" type='video/mp4'>
-      <track src="/videos/developerStories-subtitles-en.vtt" label="English subtitles"
-             kind="subtitles" srclang="en" default></track>
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video
-      </p>
-    </video>
+  <h1 class="video-host">Video
+    <% if (isHost) { %>
+    (host)
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+    <% } else { %>
+    (guest)
+    <% } %>
+  </h1>
+  <div class="row">
+    <div class="col-md-4 col-xs-3">
+      <h4>Post a Question:</h4>
+      <form id="chat-form">
+        <div class="form-group ">
+          <textarea id="chat-input" rows="4" placeholder="what's on your mind?"></textarea>
+        </div>
+        <div class="form-group clearfix">
+          <span>Timeline:</span>
+          <span id="chat-timeline"></span>
+          <button class="btn btn-primary btn-xs pull-right">Send</button>
+        </div>
+      </form>
+
+      <h4>Question lists</h4>
+      <ul id="chat-message" class="list-group">
+        <% for(var i=0; i<chatMsg.length; i++) { %>
+          <li class="list-group-item" data-json="<%= JSON.stringify(chatMsg[i]) %>" data-key="<%= chatMsg[i].key %>" data-timeline="<%= chatMsg[i].timeline %>">
+            <span class="glyphicon glyphicon-play-circle"></span>
+            <span class="chat-time"><%= chatMsg[i].timelineFormatted %>:</span>
+            <span class="chat-line"><%= chatMsg[i].msg %></span>
+          </li>
+        <% } %>
+      </ul>
+    </div>
+    <div class="col-md-8 col-xs-9">
+      <video id="really-cool-video" class="video-js vjs-default-skin" controls
+             preload="auto" data-setup='{}'>
+        <source src="/videos/sunjoeMowJoe14.mp4#t=<%= hostTimeline%>" type='video/mp4'>
+        <!--<track src="/videos/developerStories-subtitles-en.vtt" label="English subtitles"-->
+        kind="subtitles" srclang="en" default></track>
+        <p class="vjs-no-js">
+          To view this video please enable JavaScript, and consider upgrading to a web browser that
+          supports HTML5 video
+        </p>
+      </video>
+      <div id="video-subtitle"></div>
+    </div>
   </div>
 </div>
-<script>
-  // client
-  var isHost = '<%= isHost%>';
-  var socket = io('http://localhost:3000');
-  socket.on('connect', function () {
-    console.log("socket connected on client");
-  });
-
-  var $video = $("#really-cool-video"),
-    video = $video[0];
-  if (isHost === "true") {
-    // Host: control pause, timeupdate
-    $video.on("timeupdate", function() {
-      //if controlling host: then send timeline to server socket io
-      console.log(video.currentTime);
-      socket.emit("timeupdate", $video[0].currentTime);
-    });
-    $video.on("pause", function() {
-      socket.emit("pause", $video[0].currentTime);
-    });
-  } else {
-    // Client: listen to server timeupdate io
-    socket.on("timeupdate", function (timeline) {
-      console.log(timeline);
-      // set video current time
-      video.currentTime = timeline;
-      if (video.paused) {
-        video.play();
-      }
-    });
-    socket.on("pause", function(timeline) {
-      video.currentTime = timeline;
-      video.pause();
-    });
-  }
-
-  window.onbeforeunload = function(e) {
-    socket.disconnect();
-  };
-
-
-  //src="/videos/video-test.mp4#t=174"
-//  var player = videojs('really-cool-video', { /* Options */ }, function() {
-//    console.log('Good to go!');
-
-//    this.play(); // if you don't trust autoplay for some reason
-
-    // How about an event listener?
-//    this.on('ended', function() {
-//      console.log('awww...over so soon?');
-//    });
-
-    //get time
-//    setInterval(function() {
-//      var whereYouAt = player.currentTime();
-//      console.log(whereYouAt);
-//
-//    }, 1000);
-
-    // set time
-//    player.currentTime(120); // 2 minutes into the video
-//  });
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+<script id="entry-template" type="text/x-handlebars-template">
+  <div class="video-question">
+    <div>
+      {{this.timelineFormatted}}: {{this.msg}}
+    </div>
+    {{#if this.answers}}
+      {{#each this.answers}}
+        {{this}}
+      {{/each}}
+    <form class="video-answer">
+      <h5>Post your answer:</h5>
+      <input type="text" class="video-input" placeholder="Share my answer.."/>
+    </form>
+    {{/if}}
+  </div>
 </script>
+<script>
+  window.isHost = '<%= isHost%>';
+  window.hostTimeline = '<%= hostTimeline%>';
+</script>
+<script src="/js/video.js"></script>
 </body>
 </html>

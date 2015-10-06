@@ -10,11 +10,19 @@ let MongoStore = require('connect-mongo')(session)
 let bodyParser = require('body-parser')
 let passportMiddleware = require('./middleware/passport')
 let flash = require('connect-flash')
+
+let socketio = require('socket.io')
+let http = require('http')
+
 const NODE_ENV = process.env.NODE_ENV || 'development'
 
 module.exports = class App {
   constructor(config) {
     let expressServer = this.expressServer = express()
+
+    let server = http.createServer(expressServer)
+    let io = socketio.listen(server)
+
 
     passportMiddleware.configure()
     this.expressServer.passport = passportMiddleware.passport
@@ -38,9 +46,10 @@ module.exports = class App {
     this.expressServer.use(bodyParser.json()) // get information from html forms
     this.expressServer.use(bodyParser.urlencoded({ extended: true }))
 
+    let mongoStore = new MongoStore({url: config.database[NODE_ENV].url})
     this.expressServer.use(session({
       secret: 'letswatch',
-      store: new MongoStore({url: config.database[NODE_ENV].url}),
+      store: mongoStore,
       resave: true,
       saveUninitialized: true
     }))
@@ -51,6 +60,9 @@ module.exports = class App {
     this.expressServer.use(this.expressServer.passport.session())
     // flash messages are stored in the session
     this.expressServer.use(flash())
+
+    //require("./socketioSetup")(server, io, mongoStore)
+
     // configure and setup routes
     routes(this.expressServer)
   }

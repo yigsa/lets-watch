@@ -3,7 +3,8 @@
 ## Setup 
 ```
 npm install 
-npm start
+npm run dev
+http://127.0.0.1:8000
 ```
 
 ## Walkthrough
