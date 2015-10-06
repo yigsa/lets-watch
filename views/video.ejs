@@ -15,12 +15,12 @@
     (host)
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
     <% } else { %>
-    (guest)
+    (guest) <button id="btn-sync" class="btn btn-xs btn-success">Sync on</button>
     <% } %>
   </h1>
   <div class="row">
     <div class="col-md-4 col-xs-3">
-      <h4>Post a Question:</h4>
+      <h4>Post a comment:</h4>
       <form id="chat-form">
         <div class="form-group ">
           <textarea id="chat-input" rows="4" placeholder="what's on your mind?"></textarea>
@@ -32,7 +32,7 @@
         </div>
       </form>
 
-      <h4>Question lists</h4>
+      <h4>Comments</h4>
       <ul id="chat-message" class="list-group">
         <% for(var i=0; i<chatMsg.length; i++) { %>
           <li class="list-group-item" data-json="<%= JSON.stringify(chatMsg[i]) %>" data-key="<%= chatMsg[i].key %>" data-timeline="<%= chatMsg[i].timeline %>">

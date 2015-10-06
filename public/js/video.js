@@ -40,6 +40,10 @@ if (isHost === "true") {
     clientIO.emit("play", $video[0].currentTime);
   });
 } else {
+  enableClientVideoSync();
+}
+
+function enableClientVideoSync() {
   // Client: listen to server timeupdate io
   clientIO.on("timeupdate", function (timeline) {
     console.log(timeline);
@@ -56,6 +60,26 @@ if (isHost === "true") {
     }
   });
 }
+
+$("#btn-sync").on("click", function() {
+  var $this = $(this);
+  // turn off
+  if ($this.hasClass("btn-success")) {
+    $this.removeClass("btn-success")
+      .addClass("btn-danger")
+      .text("Sync off");
+
+    clientIO.removeAllListeners("timeupdate");
+    clientIO.removeAllListeners("pause");
+    clientIO.removeAllListeners("play");
+  } else { //turn on
+    $this.removeClass("btn-danger")
+      .addClass("btn-success")
+      .text("Sync on");
+
+    enableClientVideoSync();
+  }
+});
 
 $("#chat-message").on("click", ".list-group-item", function(ev) {
   //click item to update video timeline
@@ -108,6 +132,7 @@ $chat.on("submit", function(ev) {
     timeline: $chat.data("timeline")
   };
   clientIO.emit("chat", data);
+  $chatInput.val("");
 });
 
 window.onbeforeunload = function(e) {
