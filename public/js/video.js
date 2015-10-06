@@ -135,6 +135,26 @@ $chat.on("submit", function(ev) {
   $chatInput.val("");
 });
 
+// copy & paste feature
+//var copy = new ZeroClipboard( document.getElementById("copy-button") );
+//copy.on( "ready", function( readyEvent ) {
+//  // alert( "ZeroClipboard SWF is ready!" );
+//
+//  copy.on( "aftercopy", function( event ) {
+//    // `this` === `client`
+//    // `event.target` === the element that was clicked
+//    event.target.style.display = "none";
+//    //alert("Copied text to clipboard: " + event.data["text/plain"] );
+//  } );
+//} );
+//$("body").on("copy", ".zclip", function(/* ClipboardEvent */ e) {
+//    e.clipboardData.clearData();
+//    e.clipboardData.setData("text/plain", $(this).data("zclip-text"));
+//
+//    console.log("done");
+//    e.preventDefault();
+//  });
+
 window.onbeforeunload = function(e) {
   clientIO.disconnect();
 };

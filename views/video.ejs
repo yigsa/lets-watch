@@ -10,14 +10,16 @@
 </head>
 <body>
 <div class="container">
-  <h1 class="video-host">Video
+  <h2 class="video-host">Video
     <% if (isHost) { %>
     (host)
+    <!--<button class="zclip" data-zclip-text="Testing 1-2-3!">Click to copy!</button>-->
+    <!--<button id="copy-button" data-clipboard-text="Copy Me!" title="Click to copy me.">Copy to Clipboard</button>-->
     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
     <% } else { %>
     (guest) <button id="btn-sync" class="btn btn-xs btn-success">Sync on</button>
     <% } %>
-  </h1>
+  </h2>
   <div class="row">
     <div class="col-md-4 col-xs-3">
       <h4>Post a comment:</h4>
@@ -61,6 +63,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/zclip/1.1.2/jquery.zclip.min.js"></script>-->
 <script id="entry-template" type="text/x-handlebars-template">
   <div class="video-question">
     <div>
