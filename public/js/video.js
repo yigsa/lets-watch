@@ -1,7 +1,7 @@
 // client
 //http://www.walmart.com/ip/Sun-Joe-Mow-Joe-14-Electric-Lawn-Mower-with-Grass-Box/11538868
 var socketIoPort = "3000";
-var socketIoDomain = "http://" + window.location.hostname + ":" + socketIoPort;
+var socketIoDomain = location.protocol + "//" + window.location.hostname + ":" + socketIoPort;
 var clientIO = io(socketIoDomain);
 
 var source = $("#entry-template").html();
