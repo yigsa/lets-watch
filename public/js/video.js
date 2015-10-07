@@ -135,6 +135,8 @@ $chat.on("submit", function(ev) {
   $chatInput.val("");
 });
 
+//var share = new ShareButton(".share-button");
+new Share(".share-button");
 // copy & paste feature
 //var copy = new ZeroClipboard( document.getElementById("copy-button") );
 //copy.on( "ready", function( readyEvent ) {

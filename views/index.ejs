@@ -4,16 +4,32 @@
     <title>Let's Watch!</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css"/>
     <style>
-        body         { padding-top:80px; }
+        body         {
+            padding-top:200px;
+            background: url("/img/bg.jpg")  no-repeat top right;
+            background-size: cover;
+        }
+        .glyphicon-sunglasses {vertical-align: top}
+        .jumbotron {
+            background-color: transparent;
+        }
+        .jumbotron h1 {
+            color: #fff;
+            font-size: 100px;
+        }
     </style>
+
 </head>
 <body>
 <div class="container">
 
     <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Let's Watch!</h1>
-
+        <h1>
+            <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+            Let's Watch!
+        </h1>
         <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Login</a>
         <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Signup</a>
     </div>

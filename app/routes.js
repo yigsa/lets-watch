@@ -4,14 +4,12 @@ let routeVideo = require("./routesVideo");
 module.exports = (app) => {
   let passport = app.passport
 
-  //var server = require("http").createServer(app);
-  //var io = require("socket.io")(server);
-
 	app.get('/', (req, res) => res.render('index.ejs'))
 
   // video item page
   app.get("/video", (req, res) => {
-    res.render('index.ejs')
+    console.log(req.session.passport);
+    res.render('video-list.ejs')
   });
   app.get("/video/sunjoe_mow_joe_14", routeVideo.bind(app));
 

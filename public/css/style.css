@@ -1,3 +1,9 @@
+.row {
+  background: #eee;
+}
+.video-main {
+  background: #fff;
+}
 #chat-input {
   width: 100%;
 }
@@ -34,4 +40,7 @@
 }
 #video-subtitle .chat-time {
   display: block;
+}
+.entypo-export {
+  background: #ddd !important;
 }
