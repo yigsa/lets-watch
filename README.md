@@ -8,4 +8,4 @@ http://127.0.0.1:8000
 ```
 
 ## Walkthrough
-![Video Walkthrough](https://github.com/yigsa/lets-watch/blob/master/video_sync.gif)
+![Video Walkthrough](https://github.com/yigsa/lets-watch/blob/master/ui.gif)
